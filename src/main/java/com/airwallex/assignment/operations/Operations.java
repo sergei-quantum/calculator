@@ -6,28 +6,28 @@ import java.util.Stack;
 public enum Operations {
     // TODO validate that stack is not empty
     ADDITION("+", (stack, history) -> {
-        history.push((Stack<Double>)stack.clone());
+        history.push((Stack<Double>) stack.clone());
         double operand1 = stack.pop();
         double operand2 = stack.pop();
         double result = operand1 + operand2;
         stack.push(result);
     }),
     SUBTRACTION("-", (stack, history) -> {
-        history.push((Stack<Double>)stack.clone());
+        history.push((Stack<Double>) stack.clone());
         double operand1 = stack.pop();
         double operand2 = stack.pop();
         double result = operand1 - operand2;
         stack.push(result);
     }),
     MULTIPLICATION("*", (stack, history) -> {
-        history.push((Stack<Double>)stack.clone());
+        history.push((Stack<Double>) stack.clone());
         double operand1 = stack.pop();
         double operand2 = stack.pop();
         double result = operand1 * operand2;
         stack.push(result);
     }),
     DIVISION("/", (stack, history) -> {
-        history.push((Stack<Double>)stack.clone());
+        history.push((Stack<Double>) stack.clone());
         double operand1 = stack.pop();
         double operand2 = stack.pop();
         double result = operand1 / operand2;
@@ -43,8 +43,8 @@ public enum Operations {
     });
 
 
-    private String operationName;
-    private Operation operation;
+    private final String operationName;
+    private final Operation operation;
 
     Operations(String operator, Operation operation) {
         this.operationName = operator;
