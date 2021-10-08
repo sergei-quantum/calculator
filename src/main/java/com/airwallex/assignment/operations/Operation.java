@@ -4,5 +4,5 @@ import java.util.Stack;
 
 @FunctionalInterface
 public interface Operation {
-    void execute(Stack<Double> stack, Stack<Stack<Double>> history);
+    void execute(Stack<BigDecimal> stack, Stack<Stack<BigDecimal>> history);
 }
