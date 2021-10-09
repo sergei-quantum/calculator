@@ -1,48 +1,49 @@
 package com.airwallex.assignment.operations;
 
-import java.math.BigDecimal;
+import com.airwallex.assignment.utils.CalculatorUtils;
+
 import java.math.MathContext;
 import java.util.Arrays;
-import java.util.Stack;
+import java.util.Optional;
+
+import static com.airwallex.assignment.utils.CalculatorUtils.validateStackSize;
 
 public enum Operations {
 
-    // TODO validate that stack is not empty
     ADDITION("+", (stack, history) -> {
-        validateStack(stack.size(), Operations.TWO_OPERANDS);
-        history.push((Stack<BigDecimal>) stack.clone());
+        validateStackSize(stack.size(), Operations.TWO_OPERANDS, "+");
+        history.push(CalculatorUtils.copyStack(stack));
         stack.push(stack.pop().add(stack.pop()));
     }),
     SUBTRACTION("-", (stack, history) -> {
-        validateStack(stack.size(), Operations.TWO_OPERANDS);
-        history.push((Stack<BigDecimal>) stack.clone());
+        validateStackSize(stack.size(), Operations.TWO_OPERANDS, "-");
+        history.push(CalculatorUtils.copyStack(stack));
         stack.push(stack.pop().subtract(stack.pop()));
     }),
     MULTIPLICATION("*", (stack, history) -> {
-        validateStack(stack.size(), Operations.TWO_OPERANDS);
-        history.push((Stack<BigDecimal>) stack.clone());
-        stack.push(stack.pop().multiply(stack.pop()));
+        validateStackSize(stack.size(), Operations.TWO_OPERANDS, "*");
+        history.push(CalculatorUtils.copyStack(stack));
+        stack.push(stack.pop().multiply(stack.pop(), MathContext.DECIMAL128));
     }),
     DIVISION("/", (stack, history) -> {
-        validateStack(stack.size(), Operations.TWO_OPERANDS);
-        history.push((Stack<BigDecimal>) stack.clone());
-        stack.push(stack.pop().divide(stack.pop()));
+        validateStackSize(stack.size(), Operations.TWO_OPERANDS, "/");
+        history.push(CalculatorUtils.copyStack(stack));
+        stack.push(stack.pop().divide(stack.pop(), MathContext.DECIMAL128));
     }),
     CLEAR("clear", (stack, history) -> {
-        history.push((Stack<BigDecimal>) stack.clone());
+        history.push(CalculatorUtils.copyStack(stack));
         stack.clear();
     }),
     SQRT("sqrt", (stack, history) -> {
-        validateStack(stack.size(), Operations.ONE_OPERAND);
-        history.push((Stack<BigDecimal>) stack.clone());
+        validateStackSize(stack.size(), Operations.ONE_OPERAND, "sqrt");
+        history.push(CalculatorUtils.copyStack(stack));
         stack.push(stack.pop().sqrt(MathContext.DECIMAL128));
     }),
     UNDO("undo", (stack, history) -> {
         stack.clear();
-        history.pop().forEach(stack::push);
-//        System.out.println("---------------");
-//        System.out.println(stack);
-//        System.out.println("---------------");
+        if (!history.isEmpty()) {
+            history.pop().forEach(stack::push);
+        }
     });
 
     private static final int ONE_OPERAND = 1;
@@ -56,21 +57,13 @@ public enum Operations {
         this.operation = operation;
     }
 
-    public static Operations parseOperation(String operationString) {
+    public static Optional<Operations> parseOperation(String operationString) {
         return Arrays.stream(Operations.values())
                 .filter(operation -> operation.operationName.equals(operationString))
-                .findAny()
-                .orElse(null);
-    }
-
-    private static void validateStack(int stackSize, int expectedNumberOfOperands) {
-        if (stackSize < expectedNumberOfOperands) {
-            throw new ArithmeticException("Number of operands is less than " + expectedNumberOfOperands);
-        }
+                .findAny();
     }
 
     public Operation getOperation() {
         return operation;
     }
-    // TODO add decimal format
 }
