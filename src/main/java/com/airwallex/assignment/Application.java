@@ -8,10 +8,14 @@ public class Application {
     public static void main(String[] args) {
         RPNCalculator calculator = new RPNCalculator();
         ConsoleReader consoleReader = new ConsoleReader(System.in);
+
+        System.out.println("Type 'exit' to stop application:");
         System.out.println("Enter your expression to calculate the result:");
-        while (true) {
-            String expression = consoleReader.readInputExpression();
+
+        String expression = consoleReader.readInputExpression();
+        while (!expression.equals("exit")) {
             calculator.execute(expression);
+            expression = consoleReader.readInputExpression();
         }
     }
 }
