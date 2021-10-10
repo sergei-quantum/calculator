@@ -12,9 +12,11 @@ public class Application {
         RPNCalculator calculator = new RPNCalculator();
         ConsoleReader consoleReader = new ConsoleReader(System.in);
 
-        System.out.println("Type 'exit' to stop application:");
-        System.out.println("Supported operations: +, -, *, /, sqrt, undo, clear");
+        System.out.println("---------------------------------------------------");
+        System.out.println("Type 'exit' to stop the application.");
+        System.out.println("Supported operations: +, -, *, /, sqrt, undo, clear.");
         System.out.println("Enter your expression to calculate the result:");
+        System.out.println("---------------------------------------------------");
 
         String expression = consoleReader.readInputExpression();
         while (!expression.equals("exit")) {
