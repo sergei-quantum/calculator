@@ -7,6 +7,7 @@ import com.airwallex.assignment.operations.Operations;
 import com.airwallex.assignment.utils.CalculatorUtils;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Stack;
 
 /**
@@ -15,10 +16,13 @@ import java.util.Stack;
 public class RPNCalculator {
 
     /**
+     * Big decimal format scale for console
+     */
+    private static final int BIG_DECIMAL_FORMAT_SCALE = 10;
+    /**
      * Stack where data and operation results are stored
      */
     private final Stack<BigDecimal> operandStack = new Stack<>();
-
     /**
      * Stack where each state of operand stack is stored
      */
@@ -64,7 +68,21 @@ public class RPNCalculator {
                     e.getOperationName(), position));
         }
         System.out.print("stack: ");
-        this.operandStack.forEach(entry -> System.out.print(entry.stripTrailingZeros().toPlainString() + " "));
+        this.operandStack.forEach(entry -> System.out.print(prettyPrint(entry) + " "));
         System.out.println();
+    }
+
+    /**
+     * Transforms {@link BigDecimal} to {@link String} with next format configurations:
+     * - removes trailing zeros
+     * - sets max precision to {@value #BIG_DECIMAL_FORMAT_SCALE} decimal points
+     * - rounds values according to {@link java.math.RoundingMode#HALF_UP} strategy
+     *
+     * @param bigDecimal number to transform
+     * @return formatted String representation of BigDecimal
+     */
+    private String prettyPrint(BigDecimal bigDecimal) {
+        return bigDecimal
+                .setScale(BIG_DECIMAL_FORMAT_SCALE, RoundingMode.HALF_UP).stripTrailingZeros().toPlainString();
     }
 }

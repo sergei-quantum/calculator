@@ -42,7 +42,7 @@ public abstract class BaseArithmeticOperation extends BaseOperation {
 
     /**
      * Abstract function that returns number of required operands for operation.
-     * Values {@value ONE_OPERAND} and {@value TWO_OPERANDS} can be used.
+     * Values {@value #ONE_OPERAND} and {@value #TWO_OPERANDS} can be used.
      *
      * @return number of operands
      */
@@ -50,7 +50,7 @@ public abstract class BaseArithmeticOperation extends BaseOperation {
 
     /**
      * Abstract function that calculates the result of operation.
-     * If number of operands is {@value ONE_OPERAND} use only the first argument to calculate the result.
+     * If number of operands is {@value #ONE_OPERAND} use only the first argument to calculate the result.
      *
      * @param firstOperand  first operand
      * @param secondOperand second operand
