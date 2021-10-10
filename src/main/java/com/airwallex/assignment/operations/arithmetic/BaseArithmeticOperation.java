@@ -29,7 +29,14 @@ public abstract class BaseArithmeticOperation extends BaseOperation {
     public void execute(Stack<BigDecimal> stack, Stack<Stack<BigDecimal>> history) {
         validateStackSize(stack.size(), this.getNumberOfOperands(), this.getOperationSign());
         history.push(CalculatorUtils.copyStack(stack));
-        BigDecimal result = apply(stack.pop(), getNumberOfOperands() > 1 ? stack.pop() : null);
+        BigDecimal secondOperand = stack.pop();
+        BigDecimal result;
+        if (getNumberOfOperands() > 1) {
+            BigDecimal firstOperand = stack.pop();
+            result = apply(firstOperand, secondOperand);
+        } else {
+            result = apply(secondOperand, null);
+        }
         stack.push(result);
     }
 

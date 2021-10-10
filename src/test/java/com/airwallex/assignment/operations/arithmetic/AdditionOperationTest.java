@@ -28,7 +28,7 @@ class AdditionOperationTest {
             "80.79, 1.01, 81.80",
             "0.000001, 0.000001, 0.000002",
     })
-    void apply(BigDecimal firstOperand, BigDecimal secondOperand, BigDecimal result) {
+    public void apply(BigDecimal firstOperand, BigDecimal secondOperand, BigDecimal result) {
         assertEquals(result, additionOperation.apply(firstOperand, secondOperand));
     }
 }

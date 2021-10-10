@@ -19,6 +19,7 @@ public abstract class BaseOperation {
      *
      * @param stack   stack to operate
      * @param history historical stack data
+     * @throws com.airwallex.assignment.exceptions.BaseCalculatorException if something goes wrong during execution
      */
     public abstract void execute(Stack<BigDecimal> stack, Stack<Stack<BigDecimal>> history);
 

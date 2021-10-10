@@ -1,5 +1,6 @@
 package com.airwallex.assignment.operations.arithmetic;
 
+import com.airwallex.assignment.exceptions.ArithmeticCalculationException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -38,6 +39,8 @@ class SquareRootOperationTest {
     void apply_failsToExtractSquareRoot() {
         BigDecimal input = new BigDecimal(-3);
 
-        assertThrows(ArithmeticException.class, () -> squareRootOperation.apply(input, null));
+        Throwable throwable = assertThrows(ArithmeticCalculationException.class,
+                () -> squareRootOperation.apply(input, null));
+        assertEquals("Attempted square root of negative BigDecimal", throwable.getMessage());
     }
 }

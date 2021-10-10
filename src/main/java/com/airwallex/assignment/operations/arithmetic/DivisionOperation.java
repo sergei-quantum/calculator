@@ -1,5 +1,7 @@
 package com.airwallex.assignment.operations.arithmetic;
 
+import com.airwallex.assignment.exceptions.ArithmeticCalculationException;
+
 import java.math.BigDecimal;
 
 /**
@@ -19,6 +21,10 @@ public class DivisionOperation extends BaseArithmeticOperation {
 
     @Override
     public BigDecimal apply(BigDecimal firstOperand, BigDecimal secondOperand) {
-        return firstOperand.divide(secondOperand, PRECISION_THIRTY_FOUR_DIGITS);
+        try {
+            return firstOperand.divide(secondOperand, PRECISION_THIRTY_FOUR_DIGITS);
+        } catch (ArithmeticException e) {
+            throw new ArithmeticCalculationException(e.getMessage(), getOperationSign());
+        }
     }
 }

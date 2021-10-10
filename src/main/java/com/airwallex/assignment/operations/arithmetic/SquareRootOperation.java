@@ -1,5 +1,7 @@
 package com.airwallex.assignment.operations.arithmetic;
 
+import com.airwallex.assignment.exceptions.ArithmeticCalculationException;
+
 import java.math.BigDecimal;
 
 /**
@@ -14,7 +16,11 @@ public class SquareRootOperation extends BaseArithmeticOperation {
 
     @Override
     public BigDecimal apply(BigDecimal firstOperand, BigDecimal secondOperand) {
-        return firstOperand.sqrt(PRECISION_THIRTY_FOUR_DIGITS);
+        try {
+            return firstOperand.sqrt(PRECISION_THIRTY_FOUR_DIGITS);
+        } catch (ArithmeticException e) {
+            throw new ArithmeticCalculationException(e.getMessage(), getOperationSign());
+        }
     }
 
     @Override

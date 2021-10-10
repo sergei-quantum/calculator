@@ -3,6 +3,9 @@ package com.airwallex.assignment;
 import com.airwallex.assignment.calculator.RPNCalculator;
 import com.airwallex.assignment.ui.ConsoleReader;
 
+/**
+ * Main application execution class
+ */
 public class Application {
 
     public static void main(String[] args) {
@@ -10,6 +13,7 @@ public class Application {
         ConsoleReader consoleReader = new ConsoleReader(System.in);
 
         System.out.println("Type 'exit' to stop application:");
+        System.out.println("Supported operations: +, -, *, /, sqrt, undo, clear");
         System.out.println("Enter your expression to calculate the result:");
 
         String expression = consoleReader.readInputExpression();

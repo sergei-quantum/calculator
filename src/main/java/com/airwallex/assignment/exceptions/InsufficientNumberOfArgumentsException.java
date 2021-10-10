@@ -1,14 +1,18 @@
 package com.airwallex.assignment.exceptions;
 
-public class InsufficientNumberOfArgumentsException extends RuntimeException {
-    private String operatorName;
+/**
+ * Insufficient number Of arguments exception class.
+ * Can be used when provided arguments is not enough for operation
+ */
+public class InsufficientNumberOfArgumentsException extends BaseCalculatorException {
 
-    public InsufficientNumberOfArgumentsException(String message, String operatorName) {
-        super(message);
-        this.operatorName = operatorName;
-    }
-
-    public String getOperatorName() {
-        return operatorName;
+    /**
+     * Constructor with parameters
+     *
+     * @param message       exception message
+     * @param operationName name of the operation
+     */
+    public InsufficientNumberOfArgumentsException(String message, String operationName) {
+        super(message, operationName);
     }
 }

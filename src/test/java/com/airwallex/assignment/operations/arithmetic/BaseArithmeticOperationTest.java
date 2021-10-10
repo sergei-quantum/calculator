@@ -7,7 +7,8 @@ import org.junit.jupiter.api.Test;
 import java.math.BigDecimal;
 import java.util.Stack;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * Unit tests for {@link BaseArithmeticOperation} class
@@ -56,6 +57,8 @@ class BaseArithmeticOperationTest {
         stack.push(new BigDecimal(10));
         Stack<Stack<BigDecimal>> history = new Stack<>();
 
-        assertThrows(InsufficientNumberOfArgumentsException.class, () -> newOperation.execute(stack, history));
+        Throwable throwable = assertThrows(InsufficientNumberOfArgumentsException.class,
+                () -> newOperation.execute(stack, history));
+        assertEquals("Number of operands is less than 2", throwable.getMessage());
     }
 }

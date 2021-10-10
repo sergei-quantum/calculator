@@ -1,5 +1,6 @@
 package com.airwallex.assignment.operations.arithmetic;
 
+import com.airwallex.assignment.exceptions.ArithmeticCalculationException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -7,7 +8,8 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 import java.math.BigDecimal;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * Unit tests for {@link DivisionOperation} class
@@ -38,6 +40,8 @@ class DivisionOperationTest {
         BigDecimal firstOperand = new BigDecimal(1);
         BigDecimal secondOperand = new BigDecimal(0);
 
-        assertThrows(ArithmeticException.class, () -> divisionOperation.apply(firstOperand, secondOperand));
+        Throwable throwable = assertThrows(ArithmeticCalculationException.class,
+                () -> divisionOperation.apply(firstOperand, secondOperand));
+        assertEquals("Division by zero", throwable.getMessage());
     }
 }

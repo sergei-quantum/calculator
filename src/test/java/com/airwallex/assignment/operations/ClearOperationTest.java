@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
- * Unit tests for {@link com.airwallex.assignment.operations.arithmetic.SubtractionOperation} class
+ * Unit tests for {@link ClearOperation} class
  */
 class ClearOperationTest {
 
